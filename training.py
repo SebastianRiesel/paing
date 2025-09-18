@@ -120,14 +120,15 @@ def against_auto_player(screen:Screen, ais:list[TrainablePlayer]):
 
 if __name__ == "__main__":
 
-    layer1 = ComplexNNLayer(8,3,ActivationFunction.RELU, 1)
-    layer2 = ComplexNNLayer(3, 2, ActivationFunction.LINEAR, 1)
-    nn = ComplexNN([layer1, layer2])
+    layer1 = ComplexNNLayer(8,4,ActivationFunction.RELU, 1)
+    layer2 = ComplexNNLayer(4, 4, ActivationFunction.RELU, 1)
+    layer3 = ComplexNNLayer(4, 2, ActivationFunction.LINEAR, 1)
+    nn = ComplexNN([layer1, layer2, layer3])
 
     #nn = PyTorchNN()
 
-    trainer = EvolutionalTrainer(Screen(300,550), lambda : NNPlayer(nn), 10, 3)
-    n = 50
+    trainer = EvolutionalTrainer(Screen(300,550), lambda : NNPlayer(nn), 20, 4)
+    n = 500
     for iteration in range(n):
         trainer.training_iteration(against_each_other)
         print(f"Score {iteration + 1}/{n}:", trainer.ais[0].score)

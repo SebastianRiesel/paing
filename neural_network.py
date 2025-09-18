@@ -1,4 +1,6 @@
 from abc import ABC, abstractmethod
+from textwrap import indent
+
 
 class NeuralNetwork(ABC):
     def __init__(self):
@@ -117,7 +119,7 @@ class ComplexNN(NeuralNetwork):
         for layer in self.layers:
             data.append(layer.to_dict())
         with open(path, "w+") as file:
-            file.write(json.dumps(data))
+            file.write(json.dumps(data, indent = 2))
 
 
 
