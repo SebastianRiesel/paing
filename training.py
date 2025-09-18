@@ -94,7 +94,7 @@ class EvolutionalTrainer:
 
         for i in range(self.stay_alive_count, len(self.ais)):
             self.ais[i] = deepcopy(self.ais[i % self.stay_alive_count]) # copy the first n ais into all spots
-            self.ais[i].mutate(0.5)
+            self.ais[i].mutate(0.1)
 
 
 def against_each_other(screen:Screen,ais:list[TrainablePlayer]):
@@ -111,10 +111,10 @@ def against_auto_player(screen:Screen, ais:list[TrainablePlayer]):
     auto = AutoPlayer1()
     for ai in ais:
         game = Game(screen, ai, auto)
-        game.start_n_games(3, 2500)
+        game.start_n_games(10, 3000)
 
         game = Game(screen, auto, ai)
-        game.start_n_games(3, 2500)
+        game.start_n_games(10, 3000)
 
 
 
@@ -127,18 +127,11 @@ if __name__ == "__main__":
 
     #nn = PyTorchNN()
 
-    trainer = EvolutionalTrainer(Screen(300,550), lambda : NNPlayer(nn), 20, 4)
-    n = 500
+    trainer = EvolutionalTrainer(Screen(300,550), lambda : NNPlayer(nn), 40, 20)
+    n = 5000
     for iteration in range(n):
         trainer.training_iteration(against_each_other)
         print(f"Score {iteration + 1}/{n}:", trainer.ais[0].score)
 
-    trainer.ais[0].save(f'large.model')
+    trainer.ais[0].save(f'long_large.model')
 
-    top_player = trainer.ais[0]
-    bottom_player = AutoPlayer1()
-    screen = PygameScreen(300, 550, 60)
-    game = Game(screen, top_player, bottom_player)
-
-    while True:
-        game.start_n_games(5)

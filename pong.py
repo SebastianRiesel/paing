@@ -167,7 +167,6 @@ class Game:
             self.bottom_paddle.accelerate(-1)
         elif bottom_action == PlayerAction.QUIT:
             self.running = False
-
         if top_action == PlayerAction.ACCELERATE_LEFT:
             self.top_paddle.accelerate(-1)
         elif top_action == PlayerAction.ACCELERATE_RIGHT:
