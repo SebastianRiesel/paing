@@ -4,20 +4,17 @@ from pong import *
 
 class PygameScreen(Screen):
 
-    def __init__(self, width, height):
+    def __init__(self, width, height, fps):
         super().__init__(width, height)
         self.canvas = None
         self.background = (0,0,0)
         self.color = (255,255,255)
-        self.fps = 60
+        self.fps = fps
         self.clock = pygame.time.Clock()
         pygame.init()
         pygame.font.init()
         self.font = pygame.font.SysFont('Comic Sans MS', 30)
         self.canvas = pygame.display.set_mode((self.size.x, self.size.y))
-
-    def start_game(self):
-        pass
 
     def draw(self, screen_info:ScreenInformation):
         pygame.draw.rect(self.canvas, self.background, pygame.Rect(0, 0, self.size.x, self.size.y))
@@ -35,10 +32,6 @@ class PygameScreen(Screen):
         pygame.display.flip()
         self.clock.tick(self.fps)
 
-
-
-    def end_game(self):
-        pass
 
 class BottomPygamePlayer(Player):
     def __init__(self):

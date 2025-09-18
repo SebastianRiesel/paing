@@ -71,25 +71,11 @@ class Player:
     def __init__(self):
         pass
 
-    def initialize(self):
-        pass
-
-    def start_game(self):
-        pass
-
     def get_action(self,player_info: PlayerInformation) -> PlayerAction:
         return PlayerAction.DO_NOTHING
 
-    def end_game(self):
-        pass
 
     def receive_player_data(self, data: GameData):
-        pass
-
-    def train(self):
-        pass
-
-    def finalize(self):
         pass
 
 
@@ -255,8 +241,6 @@ class Game:
         self.running = True
 
         self.screen.start_game()
-        self.top_player.start_game()
-        self.bottom_player.start_game()
 
         frames = 0
         while self.running:
@@ -280,8 +264,7 @@ class Game:
 
 
         self.screen.end_game()
-        self.top_player.end_game()
-        self.bottom_player.end_game()
+
 
     def start_n_games(self, num_games: int, max_frames_per_game:int = -1):
         self.top_game_data = GameData()
